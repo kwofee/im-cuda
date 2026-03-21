@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/cuda",
+                "/usr/lib/cuda/include",
+                "/home/laalenthika/anaconda3/include/python3.12",
+                "/home/laalenthika/anaconda3/lib/python3.12/site-packages/pybind11/include",
+                "/usr/include/c++/11",
+                "/usr/include/x86_64-linux-gnu/c++/11",
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/include"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "cStandard": "c17"
+        }
+    ],
+    "version": 4
+}
