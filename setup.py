@@ -51,6 +51,7 @@ ext = Extension(
     sources=[
         "src/bindings.cpp",
         "src/base.cu",
+        "src/conv2d.cu",
     ],
     include_dirs=[
         PYBIND11_INCLUDE,
