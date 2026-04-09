@@ -50,6 +50,7 @@ ext = Extension(
     name="my_extension",
     sources=[
         "src/bindings.cpp",
+        "src/filters.cpp",
         "src/base.cu",
         "src/conv2d.cu",
     ],
