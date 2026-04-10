@@ -1,4 +1,4 @@
-giimport numpy as np
+import numpy as np
 import my_extension
 
 # 5x5 test matrix
