@@ -11,7 +11,9 @@ code_blocks = [
     "lap4 = my_extension.LaplacianFilter(4)\nout_l4 = apply_and_show(lap4, 'Laplacian (4-connected)')",
     "lap8 = my_extension.LaplacianFilter(8)\nout_l8 = apply_and_show(lap8, 'Laplacian (8-connected)')",
     "gauss3 = my_extension.GaussianBlur(3, 1.0)\nout_g3 = apply_and_show(gauss3, 'Gaussian Blur (3x3, sigma=1.0)')",
-    "gauss7 = my_extension.GaussianBlur(7, 2.0)\nout_g7 = apply_and_show(gauss7, 'Gaussian Blur (7x7, sigma=2.0)')"
+    "gauss7 = my_extension.GaussianBlur(7, 2.0)\nout_g7 = apply_and_show(gauss7, 'Gaussian Blur (7x7, sigma=2.0)')",
+    "otsu = my_extension.OtsuBinarizer()\nout_otsu = apply_and_show(otsu, 'Otsu Binarization')",
+    "# RGB to HSV Conversion\nimg_rgb = Image.open('sample.jpg').convert('RGB')\nimg_rgb_arr = np.array(img_rgb, dtype=np.float32)\nm_rgb, n_rgb, c = img_rgb_arr.shape\n\nplt.figure(figsize=(8, 8))\nplt.imshow(img_rgb_arr.astype(np.uint8))\nplt.title('Original Image (RGB)')\nplt.axis('off')\nplt.show()\n\nrgb2hsv = my_extension.RGB2HSVConverter()\nout_hsv = np.zeros_like(img_rgb_arr)\nrgb2hsv.apply(img_rgb_arr, out_hsv, m_rgb, n_rgb)\n\nfig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(15, 5))\nax1.imshow(out_hsv[:,:,0], cmap='hsv')\nax1.set_title('Hue')\nax1.axis('off')\nax2.imshow(out_hsv[:,:,1], cmap='gray')\nax2.set_title('Saturation')\nax2.axis('off')\nax3.imshow(out_hsv[:,:,2], cmap='gray')\nax3.set_title('Value')\nax3.axis('off')\nplt.show()"
 ]
 
 for code in code_blocks:

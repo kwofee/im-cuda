@@ -4,6 +4,8 @@
 #include <pybind11/stl.h>
 #include "base.h"
 #include "conv2d.h"
+#include "otsu.h"
+#include "rgb2hsv.h"
 
 namespace py = pybind11;
 
@@ -37,6 +39,23 @@ void runConv2D(py::array_t<float>& input, py::array_t<float>& kernel,
 // ---- Helper: call .apply() from Python with numpy arrays ----
 void applyFilter(Conv2D& filter, py::array_t<float>& input,
                  py::array_t<float>& output, int m, int n) {
+    auto bufIn  = input.request();
+    auto bufOut = output.request();
+    filter.apply(static_cast<float*>(bufIn.ptr),
+                 static_cast<float*>(bufOut.ptr), m, n);
+}
+
+// ---- Helper: call .apply() for Otsu and RGB2HSV ----
+void applyOtsu(OtsuBinarizer& filter, py::array_t<float>& input,
+               py::array_t<float>& output, int m, int n) {
+    auto bufIn  = input.request();
+    auto bufOut = output.request();
+    filter.apply(static_cast<float*>(bufIn.ptr),
+                 static_cast<float*>(bufOut.ptr), m, n);
+}
+
+void applyRGB2HSV(RGB2HSVConverter& filter, py::array_t<float>& input,
+                  py::array_t<float>& output, int m, int n) {
     auto bufIn  = input.request();
     auto bufOut = output.request();
     filter.apply(static_cast<float*>(bufIn.ptr),
@@ -87,4 +106,18 @@ PYBIND11_MODULE(my_extension, m) {
     py::class_<GaussianBlur, Conv2D>(m, "GaussianBlur")
         .def(py::init<int, float>(), py::arg("size"), py::arg("sigma"),
              "Gaussian blur. size: odd kernel size (3,5,7). sigma: std deviation");
+
+    // Otsu Binarizer
+    py::class_<OtsuBinarizer>(m, "OtsuBinarizer")
+        .def(py::init<>(), "Otsu binarization filter")
+        .def("apply", &applyOtsu,
+             py::arg("input"), py::arg("output"), py::arg("m"), py::arg("n"),
+             "Apply Otsu binarization to an m x n float32 array");
+
+    // RGB2HSV Converter
+    py::class_<RGB2HSVConverter>(m, "RGB2HSVConverter")
+        .def(py::init<>(), "RGB to HSV converter")
+        .def("apply", &applyRGB2HSV,
+             py::arg("input"), py::arg("output"), py::arg("m"), py::arg("n"),
+             "Convert m x n RGB array (passed flattened as m x n x 3) to HSV");
 }

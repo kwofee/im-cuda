@@ -53,6 +53,8 @@ ext = Extension(
         "src/filters.cpp",
         "src/base.cu",
         "src/conv2d.cu",
+        "src/otsu.cu",
+        "src/rgb2hsv.cu"
     ],
     include_dirs=[
         PYBIND11_INCLUDE,
