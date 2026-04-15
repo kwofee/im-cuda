@@ -1,1 +1,0 @@
-Basic 2D Convolutional Kernel -> pass the value of the kernel for different convolutions
