@@ -1,0 +1,11 @@
+setup.py
+my_extension.egg-info/PKG-INFO
+my_extension.egg-info/SOURCES.txt
+my_extension.egg-info/dependency_links.txt
+my_extension.egg-info/top_level.txt
+src/base.cu
+src/bindings.cpp
+src/conv2d.cu
+src/filters.cpp
+src/otsu.cu
+src/rgb2hsv.cu
